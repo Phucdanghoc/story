@@ -1,0 +1,190 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none; 
+    color: inherit; /
+}
+
+/* Header */
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Tìm kiếm */
+.search-form {
+    width: 100%;
+    max-width: 300px; 
+}
+
+.form-control{
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    background-color: #f8f9fa;
+}
+
+.btn-outline-success{
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    background: #f8f9fa;
+    color: gray;
+}
+
+.btn-outline-success:hover{
+    border: none;
+    outline: none;
+    background: #f8f9fa;
+    color: gray;
+}
+
+/*Thông tin truyện*/
+.story {
+    margin-top: 65px; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.story-bg {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 20px;
+}
+
+.cover-photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.story-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.interaction-container {
+    margin-right: 15px;
+}
+
+.btn-read {
+    background-color: #b6e2d3;
+    color: #000;
+    border-radius: 20px;
+}
+
+.btn-follow {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-radius: 20px;
+}
+
+.btn-follow.clicked {
+    color: #ff0000;
+}
+
+/* Danh sách chương */
+.chapter-list {
+    margin-top: 30px;
+}
+
+.episode {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.episode-item-num {
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.episode-item-title {
+    flex-grow: 1;
+}
+
+/* Related Stories */
+.related-stories {
+    margin-top: 30px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    object-fit: cover; 
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    margin-bottom: 5px;
+}
+
+footer .footer-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .story-bg {
+        padding: 15px;
+    }
+
+    .cover-photo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .story-infor {
+        text-align: center;
+    }
+
+    .btn-read,
+    .btn-follow {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

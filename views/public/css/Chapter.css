@@ -1,0 +1,392 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Phần đầu */
+header a {
+    color: black;
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 6%;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px 0px gray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+header .menu-left .story-name {
+    font-size: 23px;
+    font-weight: bold;
+    max-width: 80%;
+    margin-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+header img {
+    width: 50px;
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-right .vote {
+    width: 150px;
+    height: 30px;
+    font-size: larger;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.reply-btn, .delete-btn {
+    cursor: pointer;
+}
+
+.replies {
+    margin-left: 5px;
+    display: none;
+}
+
+.reply {
+    margin-top: 10px;
+    padding-left: 5px;
+    border-left: 2px solid #ccc;
+}
+
+.reply-form {
+    margin-top: 10px;
+    display: none;
+}
+
+.reply-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.send-reply {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.menu-right .vote .fas {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.vote.clicked {
+    color: #ffcc00;
+}
+
+/* Phần thân */
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.story-stat {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+}
+
+.view, .vote {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: gray;
+}
+
+.story-stat .fas {
+    color: gray;
+}
+
+.interaction-icon {
+    margin-right: 7px;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.box-infor {
+    width: 80%;
+}
+
+.tieu-de {
+    font-size: larger;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.noi-dung {
+    margin-bottom: 30px;
+}
+
+.noi-dung div {
+    margin-bottom: 15px;
+}
+
+/* Chuyển chapter */
+.footer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+}
+
+.before, .after {
+    padding: 10px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.before:hover, .after:hover {
+    font-weight: bolder;
+    border: 1px solid #b6e2d3;
+    color: #b6e2d3;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+/* Bình luận */
+.title-cmt {
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 60px;
+    margin-top: 30px;
+}
+
+.cmt {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.box-cmt {
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.box-cmt .row {
+    border: 1px solid gray;
+    align-items: center;
+    border-radius: 30px;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    margin-top: 5px;
+    height: 30px;
+    max-height: 120px;
+}
+
+.box-cmt .row .col-2 {
+    text-align: right;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #b6e2d3;
+    color: white;
+    border: none;
+    justify-content: end;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #92c9b9;
+}
+
+#commentsList {
+    margin-top: 20px;
+}
+
+.comment {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.avt {
+    display: flex;
+    align-items: center;
+    margin-right: 7px;
+}
+
+.avt img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.comments-detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.nick-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.comments-info {
+    margin-bottom: 10px;
+    margin-left: 70px;
+}
+
+.comments-item {
+    display: flex;
+    align-items: center;
+    margin-left: 70px;
+}
+
+.comment-date {
+    color: gray;
+    font-size: small;
+}
+
+.comments-symbol {
+    display: flex;
+    align-items: center;
+}
+
+.comments-symbol .fas {
+    margin-left: 15px;
+    color: gray;
+}
+
+.feedback {
+    color: #b6e2d3;
+    font-weight: 600;
+    margin-left: 30px;
+}
+
+/*Phản hồi*/
+.reply-btn, .delete-btn {
+    cursor: pointer;
+}
+
+.replies {
+    margin-left: 5px;
+    display: none;
+}
+
+.reply {
+    margin-top: 10px;
+    padding-left: 5px;
+    border-left: 2px solid #ccc;
+}
+
+.reply-form {
+    margin-left: 10px;
+}
+
+/* Menu */
+.menu {
+    position: fixed;
+    bottom: 0;
+    right: -500px;
+    width: 500px;
+    height: 90%;
+    background-color: #f1f1f1;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.menu.open {
+    right: 0;
+}
+
+.menu .chap {
+    overflow-y:auto;
+}
+
+.menu .chap .box-chap{
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.menu .fa {
+    display: block;
+    position: absolute;
+    bottom: 55px;
+    left: -30px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color:white;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    z-index: 3;
+    color: gray;
+}
+
+.chap a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.chap a:hover {
+    font-weight: bold;
+}
