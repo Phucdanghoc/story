@@ -11,6 +11,21 @@ const apiController = {
             res.status(200).json(stories);
         });
     },
+    updateThumnail : (req, res) => {
+        const storyId = req.params.id;  
+        const thumbnail = req.file ? `/images/${req.file.filename}` : null;
+        Story.updateThumbnail(storyId, { thumbnail }, (err) => {
+            if (err) return res.status(500).json({ error: 'Database error' });
+            res.status(200).json({ success: true });
+        });
+    },
+    deleteStory: (req, res) => {
+        const storyId = req.params.id;
+        Story.delete(storyId, (err) => {
+            if (err) return res.status(500).json({ error: 'Database error' });
+            res.status(200).json({ success: true });
+        });
+    },
     getStory: (req, res) => {
         const storyId = req.params.id;
         Story.getById(storyId, (err, storyResult) => {
@@ -18,7 +33,7 @@ const apiController = {
             Chapter.getByStoryId(storyId, (err, chapters) => {
                 if (err) return res.status(500).json({ error: 'Database error' });
                 console.log(chapters);
-                
+
                 res.status(200).json({ story: storyResult[0], chapters });
             });
         });
@@ -62,8 +77,8 @@ const apiController = {
     },
     createChapter: (req, res) => {
         if (!req.session.user) return res.status(401).json({ error: 'Unauthorized' });
-        const {  title, content, chapter_number } = req.body;
-        const storyId =  parseInt(req.query.storyId, 10);
+        const { title, content, chapter_number } = req.body;
+        const storyId = parseInt(req.query.storyId, 10);
         console.log('Create chapter:', { storyId, title, content, chapter_number });
         const chapterData = { storyId, title, content, chapter_number: parseInt(chapter_number) };
         Chapter.create(chapterData, (err) => {
@@ -78,7 +93,7 @@ const apiController = {
             res.status(200).json(chapterResult[0]);
         });
     },
-    getMaxPageChapter : (req, res) => {
+    getMaxPageChapter: (req, res) => {
         const storyId = req.query.storyId;
         Chapter.getChapterNumber(storyId, (err, result) => {
             if (err) return res.status(500).json({ error: 'Database error' });
@@ -86,7 +101,6 @@ const apiController = {
         });
     },
 
-    // User APIs
     register: async (req, res) => {
         try {
             const { username, email, password, phone } = req.body;
@@ -95,10 +109,12 @@ const apiController = {
             if (!username || !email || !password) {
                 return res.status(400).json({ error: 'Thiếu thông tin bắt buộc' });
             }
+
+            // Kiểm tra email đã tồn tại chưa
             const existingUser = await new Promise((resolve, reject) => {
                 User.findByEmail(email, (err, users) => {
                     if (err) reject(err);
-                    else resolve(users[0]);
+                    else resolve(users.length > 0 ? users[0] : null);
                 });
             });
 
@@ -106,18 +122,21 @@ const apiController = {
                 return res.status(409).json({ error: 'Email đã được sử dụng' });
             }
 
-            User.create({ username, email, password, phone }, (err, result) => {
-                if (err) reject(err);
-                else resolve(result);
+            const newUser = await new Promise((resolve, reject) => {
+                User.create({ username, email, password: password, phone }, (err, result) => {
+                    if (err) reject(err);
+                    else resolve(result);
+                });
             });
 
             res.status(201).json({
                 success: true,
-                userId: result.insertId,
+                userId: newUser.insertId,
                 message: 'Đăng ký thành công'
             });
+
         } catch (err) {
-            console.log('Error:', err);
+            console.error('Error:', err);
             res.status(500).json({ error: 'Server error' });
         }
     },

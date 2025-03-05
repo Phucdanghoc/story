@@ -42,7 +42,7 @@ function renderStories(stories) {
                 <div class="col-md-7">
                     <div class="story-details">
                         <h5 class="story-title">${story.title || "Không có tiêu đề"}</h5>
-                        <p class="story-meta">Cập nhật: ${formatTime(story.updated_at)}</p>
+                        <p class="story-meta">Cập nhật: ${formatTime(story.created_at)}</p>
                         <p class="story-meta">
                             <i class="fas fa-eye"></i> ${story.views || 0} -
                             <i class="fas fa-star"></i> ${story.likes || 0} -
@@ -69,19 +69,30 @@ function renderStories(stories) {
     storyContainer.innerHTML += storyHTML;
 }
 
-/**
- * Format thời gian (ví dụ: '12 giờ trước')
- */
+
 function formatTime(updatedAt) {
     const timeDiff = Math.floor((new Date() - new Date(updatedAt)) / (1000 * 60 * 60));
     return timeDiff < 24 ? `${timeDiff} giờ trước` : `${Math.floor(timeDiff / 24)} ngày trước`;
 }
 
-/**
- * Xóa truyện theo ID
- */
+
 async function deleteStory(storyId) {
     if (!confirm("Bạn có chắc muốn xóa truyện này?")) return;
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/story/${storyId}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error("Có lỗi xảy ra khi xóa truyện");
+        }
+
+        location.reload(); // Load lại trang sau khi xóa thành công
+    } catch (error) {
+        console.error("Lỗi khi xóa truyện:", error);
+        alert(error.message || "Có lỗi xảy ra khi xóa truyện");
+    }
 
 
 }

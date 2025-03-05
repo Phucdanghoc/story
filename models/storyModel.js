@@ -70,6 +70,24 @@ const Story = {
             id
         ], callback);
     },
+    delete: (id, callback) => {
+        const sql = `
+            DELETE FROM stories 
+            WHERE id = ?
+        `;
+        db.query(sql, [id], callback);
+    },
+    updateThumbnail: (id, storyData, callback) => {
+        const sql = `
+            UPDATE stories 
+            SET thumbnail = ? 
+            WHERE id = ?
+        `;
+        db.query(sql, [
+            storyData.thumbnail, 
+            id
+        ], callback);
+    },
 };
 
 module.exports = Story;

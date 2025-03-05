@@ -100,3 +100,48 @@ function addChapter() {
     }   
     window.location.href = `/create-chapter?storyId=${STORYID}`;    
 }
+let selectedFile = null;
+
+document.getElementById("image-upload").addEventListener("change", function (event) {
+    selectedFile = event.target.files[0];
+    if (!selectedFile) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById("preview-image").src = e.target.result;
+    };
+    reader.readAsDataURL(selectedFile);
+});
+
+document.getElementById("update-thumbnail").addEventListener("click", function () {
+    if (!selectedFile) {
+        alert("Vui lòng chọn ảnh trước!");
+        return;
+    }
+    uploadThumbnail(selectedFile);
+});
+
+function uploadThumbnail(file) {
+    const storyId = new URLSearchParams(window.location.search).get("id");
+    if (!storyId) {
+        alert("Không tìm thấy ID truyện!");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("thumbnail", file);
+
+    fetch(`/api/story/${storyId}/thumbnail`, {
+        method: "PUT",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Cập nhật ảnh bìa thành công!");
+        } else {
+            alert("Lỗi khi cập nhật ảnh bìa!");
+        }
+    })
+    .catch(error => console.error("Lỗi khi cập nhật ảnh bìa:", error));
+}
