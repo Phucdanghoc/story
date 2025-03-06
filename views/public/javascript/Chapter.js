@@ -168,6 +168,8 @@ function createReplyElement(replyText) {
 }
 let CHAPTERCURRENT = 0;
 let STORYID = 0;
+let BACKCHAPTER = 0;
+let NEXTCHAPTER = 0;
 document.addEventListener("DOMContentLoaded", function () {
     const pathSegments = window.location.pathname.split("/");
 
@@ -181,18 +183,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-// const backChapter = () => {
+const backChapter = () => {
 
-//     if (CHAPTERCURRENT == 1) {
-//         alert("Chương truyện đầu tiên");
-//         return;
-//     }
-//     fetchStoryChapterData(STORYID, CHAPTERCURRENT - 1);
-// }
+    if (CHAPTERCURRENT == 1) {
+        alert("Chương truyện đầu tiên");
+        return;
+    }
+    fetchStoryChapterData(STORYID, BACKCHAPTER);
+}
 
-// const nextChapter = () => {
-//     fetchStoryChapterData(STORYID, CHAPTERCURRENT + 1);
-// }
+const nextChapter = () => {
+    fetchStoryChapterData(STORYID, NEXTCHAPTER);
+}
 
 
 const fetchStoryChapterData = (storyId, chapterId) => {
@@ -215,10 +217,22 @@ const fetchStoryChapterData = (storyId, chapterId) => {
                 return;
             }
             fillStoryChapterData(data.story, data.chapters);
+            setBackNextChapter(data.chapters);
         })
         .catch(error => console.error("Lỗi khi lấy dữ liệu:", error));
 };
-
+const setBackNextChapter = (chapters) => {
+    chapters.forEach((chapter, index) => {
+        if (chapter.id == CHAPTERCURRENT) {
+            if (index > 0) {
+                BACKCHAPTER = chapters[index - 1].id;
+            }
+            if (index < chapters.length - 1) {
+                NEXTCHAPTER = chapters[index + 1].id;
+            }
+        }
+    });
+}
 
 const fillContentChapter = (chapter) => {
     const chapterTitleElement = document.querySelector(".tieu-de");
